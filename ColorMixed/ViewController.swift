@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var redSlider: UISlider!
     @IBOutlet weak var greenSlider: UISlider!
     @IBOutlet weak var blueSlider: UISlider!
@@ -25,19 +25,16 @@ class ViewController: UIViewController {
         colorView.layer.cornerRadius = 10
         
         setColor()
-        setCurrentValue()
-        
+        setCurrentValue(for: redValueLabel, greenValueLabel, blueValueLabel)
     }
-        
+    
     @IBAction func changeSliderValue(_ sender: UISlider) {
         switch sender {
-        case redSlider:
-            redValueLabel.text = convertString(from: redSlider)
-        case greenSlider:
-            greenValueLabel.text = convertString(from: greenSlider)
-        default:
-            blueValueLabel.text = convertString(from: blueSlider)
+        case redSlider: setCurrentValue(for: redValueLabel)
+        case greenSlider: setCurrentValue(for: greenValueLabel)
+        default: setCurrentValue(for: blueValueLabel)
         }
+        
         setColor()
     }
     
@@ -50,14 +47,17 @@ class ViewController: UIViewController {
         )
     }
     
-    private func setCurrentValue() {
-        redValueLabel.text = convertString(from: redSlider)
-        greenValueLabel.text = convertString(from: greenSlider)
-        blueValueLabel.text = convertString(from: blueSlider)
-    }
-    
-    private func convertString(from slider: UISlider) -> String {
-        String(format: "%0.2f", slider.value)
+    private func setCurrentValue(for labels: UILabel...) {
+        labels.forEach { label in
+            switch label {
+            case redValueLabel:
+                redValueLabel.text = String(format: "%0.2f", redSlider.value)
+            case greenValueLabel:
+                greenValueLabel.text = String(format: "%0.2f", greenSlider.value)
+            default:
+                blueValueLabel.text = String(format: "%0.2f", blueSlider.value)
+            }
+        }
     }
 }
 
