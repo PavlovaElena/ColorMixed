@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  ColorMixed
+//  ColorMixer
 //
 //  Created by Елена Павлова on 28.05.2022.
 //
